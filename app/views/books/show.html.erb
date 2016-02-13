@@ -1,26 +1,27 @@
 <div id="books-show">
-  <h2>Ruby on Rails Power</h2>
+  <h2><%= @book.title %></h2>
   <div class="books-show-left">
-    <%= image_tag('covers/ruby_on_rails_power.jpg') %>
+    <%= image_tag(@book.coverpath) %>
   </div>
   <div class="books-show-right">
     <h3>Book Info:</h3>
     <ul>
-      <li><strong>Category:</strong> Ruby on Rails</li>
-      <li><strong>Author:</strong> Aneesha Bakharia</li>
-      <li><strong>Publisher:</strong> Course Technology PTR</li>
-      <li><strong>Year:</strong> 2007</li>
-      <li><strong>ISBN:</strong> 1598632167</li>
-      <li><strong>Format:</strong> Paperback</li>
-      <li><strong>Pages:</strong> 678</li>
+      <li><strong>Category:</strong> <%= @book.category.name %></li>
+      <li><strong>Author:</strong> <%= @book.author.last_name %>, <%= @book.author.first_name %></li>
+      <li><strong>Publisher:</strong> <% @book.publisher.name %></li>
+      <li><strong>Year:</strong> <%= @book.year %></li>
+      <li><strong>ISBN:</strong> <%= @book.isbn %></li>
+      <li><strong>Format:</strong> <%= @book.format %></li>
+      <li><strong>Pages:</strong> <%= @book.pages %></li>
     </ul>
-    <%= link_to "Buy for $5.47",
-    'http://www.amazon.com/Ruby-Rails-Power-Comprehensive-Guide/dp/1598632167',
-    class:'btn btn-success', target:'_blank' %>
+    <%= link_to "Buy for " + @book.price, @book.buy, class:'btn btn-success', target:'_blank' %>
   </div>
   <div class="clearfix"></div>
   <h4>Excerpt</h4>
   <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie ullamcorper aliquet. Aliquam dapibus arcu arcu, eget congue lectus scelerisque eu. Nam ut justo ac felis maximus pharetra. Cras eleifend non mauris at volutpat. Vestibulum turpis neque, posuere id bibendum dictum, tempor nec purus. Aenean interdum blandit felis, nec fermentum mi consequat vitae. Donec mauris nulla, accumsan vel varius eget, efficitur malesuada eros. Etiam tempus tellus feugiat, finibus nunc eget, fermentum enim. Etiam sed tincidunt neque. Morbi vel urna tempor ipsum vestibulum sodales. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In pharetra suscipit volutpat. Morbi nec ultricies elit.
+    <%= @book.excerpt %>
   </p>
+  <h3>Admin Functions</h3>
+  <%= link_to 'Edit', edit_book_path(@book.id), class:'btn btn-info' %>
+  <%= link_to 'Delete', book_path(@book), method: :delete, data: {confirm: 'Are you sure?'}, class:'btn btn-danger' %>
 </div>
