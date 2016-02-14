@@ -15,18 +15,29 @@ class AuthorsController < ApplicationController
   end
 
   def edit
+    @author = Author.find(params[:id])
   end
 
   def update
+    @author = Author.find(params[:id])
+    @author.update(author_params)
+
+    flash[:notice] = 'Author Updated'
+
+    redirect_to authors_path
   end
 
   def destroy
+    @author = Author.find(params[:id])
+    @author.destroy
+
+    flash[:notice] = 'Author Removed'
+
+    redirect_to authors_path
   end
 
   def index
-  end
-
-  def show
+    @authors = Author.all
   end
 
   private
